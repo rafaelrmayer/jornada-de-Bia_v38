@@ -1,0 +1,19 @@
+{
+  "name": "A Jornada de Bia",
+  "short_name": "Jornada de Bia",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F3F7F1",
+  "theme_color": "#F3F7F1",
+  "description": "Aplicativo de comunicação acessível com apoio de símbolos, voz e aprendizado local.",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

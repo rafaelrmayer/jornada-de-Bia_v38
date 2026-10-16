@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Meta tags PWA -->
+    <meta name="theme-color" content="#F3F7F1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Jornada de Bia">
+    <meta name="msapplication-TileColor" content="#F3F7F1">
+    
+    <!-- SEO -->
+    <title>Jornada de Bia - Comunicação Acessível com IA</title>
+    <meta name="description" content="Não é sobre ensinar alguém a falar. É sobre garantir que sua voz possa ser ouvida. - Jornada de Bia 🌻∞">
+    <meta name="author" content="Rafael Ricardo Mayer">
+    <meta name="keywords" content="comunicação acessível, ia, autismo, crianças, símbolos, pwa, girassol, infinito">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Jornada de Bia - Comunicação Acessível com IA">
+    <meta property="og:description" content="Não é sobre ensinar alguém a falar. É sobre garantir que sua voz possa ser ouvida. - Jornada de Bia 🌻∞">
+    <meta property="og:type" content="website">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Google Fonts - Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Ícones via emoji -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header role="banner">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="logo-container">
+                    <span class="logo-sunflower">🌻</span>
+                    <span class="logo-infinity">∞</span>
+                </div>
+                <div class="header-title">
+                    <h1>Jornada de Bia</h1>
+                    <p class="subtitle">Não é sobre ensinar alguém a falar. É sobre garantir que sua voz possa ser ouvida.</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-btn theme-btn" id="theme-toggle" aria-label="Alternar tema">
+                    🌸
+                    <span class="theme-tooltip" id="themeTooltip">Tema Rosa</span>
+                </button>
+                <button class="header-btn" id="stats-btn" aria-label="Estatísticas" aria-expanded="false">📊</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MENU DE NAVEGAÇÃO ===== -->
+    <nav class="nav-menu" role="navigation">
+        <div class="nav-container">
+            <button class="nav-item active" data-page="home" aria-label="Página inicial">🏠 Início</button>
+            <button class="nav-item" data-page="edit-symbols" aria-label="Editar símbolos">✏️ Símbolos</button>
+            <button class="nav-item" data-page="history" aria-label="Ver histórico">📜 Histórico</button>
+            <button class="nav-item" data-page="guardians" aria-label="Gerenciar responsáveis">👨‍👩‍👧 Responsáveis</button>
+            <button class="nav-item" data-page="medical" aria-label="Informações médicas">🏥 Médico</button>
+            <button class="nav-item" data-page="sensory-crisis" aria-label="Modo de crise sensorial">🧠 Crise</button>
+            <button class="nav-item" data-page="settings" aria-label="Configurações">⚙️ Configurações</button>
+            <button class="nav-item" data-page="about" aria-label="Sobre o aplicativo">ℹ️ Sobre</button>
+        </div>
+    </nav>
+
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <main class="main-content" role="main">
+        <section class="child-mode-bar" aria-label="Perfil da criança">
+            <div class="child-avatar" id="childAvatar">🌻</div>
+            <div class="child-info"><strong id="childGreeting">Olá! 🌻</strong><small>Modo Criança • comunicação rápida</small></div>
+            <button class="mode-pill" id="childModeBtn" type="button">🔐 Responsável</button>
+        </section>
+
+        <!-- ===== PÁGINA: INÍCIO ===== -->
+        <div class="page-section active" id="page-home">
+            <!-- Banner/Hero -->
+            <section class="hero-banner">
+                <div class="hero-card">
+                    <h2>🌻∞ Jornada de Bia</h2>
+                    <p class="hero-subtitle">Comunique-se do seu jeito.</p>
+                    <div class="hero-stats home-secondary-info" aria-hidden="true">
+                        <div class="hero-stat">
+                            <span class="number" id="totalSymbols">0</span>
+                            <span class="label">Símbolos</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="number" id="totalMessages">0</span>
+                            <span class="label">Mensagens</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="number" id="patternsLearned">0</span>
+                            <span class="label">Padrões IA</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Intenções rápidas -->
+            <section class="intent-section" aria-label="Comunicação principal">
+                <div class="section-header"><h2>🧭 O que você quer dizer?</h2></div>
+                <div class="intent-grid" id="intentGrid">
+                    <button class="intent-btn" data-intent="quero" type="button"><span class="intent-icon">💙</span><span>Quero</span><small>pedir algo</small></button>
+                    <button class="intent-btn" data-intent="preciso" type="button"><span class="intent-icon">🆘</span><span>Preciso</span><small>de ajuda</small></button>
+                    <button class="intent-btn" data-intent="sentindo" type="button"><span class="intent-icon">😊</span><span>Como estou</span><small>meu sentimento</small></button>
+                    <button class="intent-btn intent-here-btn" id="hereBtn" type="button"><span class="intent-icon">❤️</span><span>Eu estou aqui</span><small>falar agora</small></button>
+                </div>
+                <div class="intent-expansion" id="intentExpansion" hidden aria-live="polite">
+                    <div class="intent-expansion-header">
+                        <div><strong id="intentExpansionTitle">Escolha uma opção</strong><small id="intentExpansionHint">Sugestões para você</small></div>
+                        <button class="intent-collapse-btn" id="intentCollapseBtn" type="button" aria-label="Fechar sugestões">⌃</button>
+                    </div>
+                    <div class="intent-suggestions" id="intentSuggestions"></div>
+                </div>
+            </section>
+
+            <!-- Construtor de frase: fechado por padrão para reduzir estímulos -->
+            <section class="phrase-builder-entry" aria-label="Construir uma frase">
+                <button class="phrase-builder-toggle" id="phraseBuilderToggle" type="button" aria-expanded="false" aria-controls="phraseBuilderContent">
+                    <span class="phrase-builder-icon">💬</span>
+                    <span><strong id="phraseBuilderLabel">Construa sua frase</strong><small>Escolha símbolos quando quiser</small></span>
+                    <span class="phrase-builder-arrow" aria-hidden="true">›</span>
+                </button>
+            </section>
+
+            <!-- V16: CENTRAL DE COMUNICAÇÃO ADAPTATIVA -->
+            <section class="communication-hub secondary-home-section home-secondary-section" aria-label="Mais formas de comunicação">
+                <div class="section-header"><h2>🧠 Mais formas de comunicar</h2></div>
+                <div class="communication-grid" id="communicationGrid">
+                    <button class="comm-btn" data-hub="necessidade" type="button"><span class="comm-icon">🧃</span>Necessidade<small>Quero / não quero</small></button>
+                    <button class="comm-btn" data-hub="sentimento" type="button"><span class="comm-icon">❤️</span>Sentimento<small>Como estou</small></button>
+                    <button class="comm-btn" data-hub="dor" type="button"><span class="comm-icon">🤕</span>Dor / corpo<small>Onde dói?</small></button>
+                    <button class="comm-btn" data-hub="social" type="button"><span class="comm-icon">👋</span>Social<small>Falar com alguém</small></button>
+                </div>
+                <div class="adaptive-panel" id="adaptivePanel" hidden>
+                    <div class="adaptive-title" id="adaptiveTitle">Escolha uma opção</div>
+                    <div class="adaptive-grid" id="adaptiveChoices"></div>
+                    <div class="phrase-preview" id="phrasePreview" hidden>
+                        <strong id="phrasePreviewText"></strong>
+                        <button id="speakAdaptiveBtn" type="button">🔊 Falar</button>
+                    </div>
+                </div>
+                <div class="context-badge" id="contextBadge" hidden>🧠 Contexto detectado</div>
+            </section>
+
+            <!-- V24: Mais usados -->
+            <section class="most-used-section home-secondary-section">
+                <div class="section-header"><h2>🔥 Mais usados</h2><span class="see-all" id="clearMostUsed" role="button" tabindex="0">Limpar destaque</span></div>
+                <div class="most-used-grid" id="mostUsedGrid"></div>
+            </section>
+
+
+            <!-- SOS -->
+            <section class="sos-section">
+                <button class="sos-button" id="sosBtn" type="button">🆘 PRECISO DE AJUDA AGORA</button>
+                <div class="sos-sub">Fala uma mensagem de emergência e oferece contato com o responsável principal.</div>
+            </section>
+
+            <div class="sensory-crisis-entry">
+                <button class="sensory-crisis-btn" type="button" onclick="openSensoryCrisis()">🧠 Modo de crise sensorial</button>
+            </div>
+
+            <!-- Categorias -->
+            <section class="categories-section home-secondary-section">
+                <div class="section-header">
+                    <h2>📂 Categorias</h2>
+                    <span class="see-all" id="showAllCategories" role="button" tabindex="0">Ver todas →</span>
+                </div>
+                <div class="categories-grid" id="categoriesGrid"></div>
+            </section>
+
+            <!-- Frases rápidas -->
+            <section class="quick-phrases-section home-secondary-section">
+                <div class="section-header"><h2>💬 Frases rápidas</h2></div>
+                <div class="quick-phrases-grid" id="quickPhrasesGrid"></div>
+            </section>
+
+            <!-- Favoritos: fechado por padrão para manter a tela limpa -->
+            <section class="favorites-section favorites-collapsible" id="favoritesSection">
+                <button class="section-header section-header-toggle" id="favoritesToggle" type="button" aria-expanded="false" aria-controls="favoritesGrid">
+                    <h2>⭐ Meus favoritos</h2><span class="collapse-indicator" aria-hidden="true">⌄</span>
+                </button>
+                <div class="favorites-grid" id="favoritesGrid" hidden></div>
+            </section>
+
+            <!-- Símbolos -->
+            <section class="symbols-section home-builder-section" id="homeSymbolsBuilder">
+                <div class="builder-opened-header">
+                    <div>
+                        <strong>💬 Construa sua frase</strong>
+                        <small>Escolha os símbolos que deseja combinar.</small>
+                    </div>
+                    <button class="builder-close-btn" id="phraseBuilderClose" type="button">Fechar</button>
+                </div>
+                <div class="section-header">
+                    <h2>🔣 Símbolos</h2>
+                    <span class="see-all" id="toggleSymbolsView" role="button" tabindex="0">Mostrar todos</span>
+                </div>
+                <div class="symbols-grid" id="symbolsGrid" role="grid"></div>
+            </section>
+
+            <!-- Sugestões IA -->
+            <section class="suggestions-section home-secondary-section">
+                <div class="suggestions-container">
+                    <div class="suggestions-header" id="suggestions-toggle" role="button" tabindex="0" aria-expanded="true">
+                        <span>💡 Sugestões Inteligentes</span>
+                        <span class="suggestions-arrow">▼</span>
+                    </div>
+                    <div class="suggestions-list" id="suggestionsList" role="list">
+                        <p class="suggestions-placeholder">Selecione símbolos para ver sugestões da IA</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IA contextual: camada interna, não exibida na interface da criança -->
+            <section class="context-brain-section ai-internal-layer" aria-label="Motor interno de contexto" hidden>
+                <div class="context-brain-card">
+                    <div class="context-brain-head"><h2>🧠 Cérebro de Contexto</h2><span class="context-status" id="brainStatus">Observando</span></div>
+                    <div class="context-controls">
+                        <label for="environmentContext" class="sr-only">Ambiente atual</label>
+                        <select id="environmentContext" class="context-select" aria-label="Ambiente atual">
+                            <option value="auto">📍 Contexto automático</option><option value="casa">🏠 Casa</option><option value="escola">🏫 Escola</option><option value="passeio">🌳 Passeio</option><option value="medico">👨‍⚕️ Médico</option><option value="carro">🚗 Carro</option>
+                        </select>
+                        <button type="button" class="context-select" id="clearContextBtn">↺ Limpar contexto</button>
+                    </div>
+                    <div class="context-grid" id="contextBrainGrid"></div>
+                    <div class="context-prediction" id="contextBrainPrediction"><strong>🌻 Estou aprendendo os padrões de comunicação.</strong><small>Quanto mais a Jornada de Bia for usada, melhores ficam as previsões.</small></div><div class="adaptive-insight" id="adaptiveInsight"><strong>🔎 Leitura do contexto</strong><span>Selecione símbolos para eu procurar padrões parecidos.</span><div class="context-learning-bar"><span id="contextLearningBar"></span></div></div>
+                    <div class="context-actions"><button type="button" id="speakContextPrediction">🔊 Falar sugestão</button><button type="button" id="useContextPrediction">⚡ Usar frase</button></div>
+                </div>
+            </section>
+
+            <section class="predictive-section home-secondary-section" aria-label="Frases que a Jornada de Bia prevê">
+                <div class="predictive-card">
+                    <div class="predictive-head">
+                        <h2>✨ Você pode estar querendo dizer...</h2>
+                        <span class="predictive-badge" id="predictiveConfidence">Aprendendo</span>
+                    </div>
+                    <div class="predictive-list" id="predictiveList" role="list">
+                        <p class="predictive-empty">Use alguns símbolos para a Jornada de Bia aprender suas combinações.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback -->
+            <section class="feedback-area home-builder-section" id="homeFeedbackBuilder">
+                <div class="feedback-container message-focus">
+                    <div id="feedbackDisplay" class="feedback-display" aria-live="assertive" aria-atomic="true">
+                        <p class="feedback-placeholder">🌻 Toque em um símbolo para começar</p>
+                    </div>
+                    <div class="feedback-actions">
+                        <button id="speakBtn" class="action-btn" aria-label="Falar mensagem atual">🔊 Falar</button>
+                        <button id="clearBtn" class="action-btn" aria-label="Limpar mensagem">🗑️ Limpar</button>
+                        <button id="saveBtn" class="action-btn" aria-label="Salvar mensagem">💾 Salvar</button>
+                        <button id="whatsappContactBtn" class="action-btn whatsapp-contact-btn" aria-label="Contatar responsável via WhatsApp">
+                            💬 Chamar Responsável
+                        </button>
+                    </div>
+                    <div class="feedback-rating" aria-label="Avaliar sugestão da IA">
+                        <button id="aiLikeBtn" type="button" title="Gostei">👍 Funcionou</button>
+                        <button id="aiDislikeBtn" type="button" title="Não gostei">👎 Não ajudou</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ESTATÍSTICAS -->
+            <section class="stats-container home-secondary-section" id="stats-section">
+                <h3>📊 Estatísticas</h3>
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-item"><span class="stat-value">0</span><span class="stat-label">Mensagens</span></div>
+                    <div class="stat-item"><span class="stat-value">0</span><span class="stat-label">Símbolos usados</span></div>
+                    <div class="stat-item"><span class="stat-value">0</span><span class="stat-label">Média por msg</span></div>
+                    <div class="stat-item"><span class="stat-value ai-stat">0</span><span class="stat-label">🧠 Padrões IA</span></div>
+                </div>
+            </section>
+
+            <!-- Histórico -->
+            <section class="history-section home-secondary-section">
+                <div class="history-header">
+                    <h2>📜 Histórico</h2>
+                    <button id="clearHistoryBtn" class="clear-history-btn" aria-label="Limpar todo o histórico">🗑️ Limpar histórico</button>
+                </div>
+                <div id="historyList" class="history-list" role="list">
+                    <p class="history-empty">Nenhuma mensagem salva ainda</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: CRISE SENSORIAL ===== -->
+        <div class="page-section" id="page-sensory-crisis">
+            <section class="sensory-crisis-page">
+                <div class="sensory-crisis-card">
+                    <div class="sensory-calm-brand">🌻 ♾️</div>
+                    <h2>🧠 MODO CALMO</h2>
+                    <p>Escolha uma mensagem. A tela reduz estímulos e mantém apenas o essencial.</p>
+                    <div class="sensory-crisis-grid">
+                        <button class="sensory-option" type="button" onclick="speakSensory('Preciso de silêncio')">🤫<strong>Silêncio</strong><small>Preciso de menos sons</small></button>
+                        <button class="sensory-option" type="button" onclick="speakSensory('Preciso de um lugar tranquilo')">🌙<strong>Lugar calmo</strong><small>Quero diminuir os estímulos</small></button>
+                        <button class="sensory-option" type="button" onclick="speakSensory('Não quero ser tocado')">✋<strong>Não me toque</strong><small>Preciso de espaço pessoal</small></button>
+                        <button class="sensory-option" type="button" onclick="speakSensory('Preciso sair daqui')">🚪<strong>Quero sair</strong><small>Preciso ir para outro lugar</small></button>
+                        <button class="sensory-option" type="button" onclick="speakSensory('Preciso do meu responsável')">❤️<strong>Responsável</strong><small>Quero uma pessoa de confiança</small></button>
+                        <button class="sensory-option sensory-help-option" type="button" onclick="speakSensory('Estou em crise sensorial e preciso de ajuda')">🆘<strong>Preciso de ajuda</strong><small>Comunicar a necessidade</small></button>
+                    </div>
+                    <div class="sensory-crisis-actions">
+                        <button class="sensory-contact" type="button" onclick="callSensoryResponsible()">❤️ CHAMAR RESPONSÁVEL</button>
+                        <button class="sensory-here" type="button" onclick="speakSensory('Estou aqui e preciso que venham até mim')">📍 ESTOU AQUI</button>
+                    </div>
+                    <button class="sensory-exit" type="button" onclick="closeSensoryCrisis()">✓ Voltar</button>
+                    <div class="sensory-note">Modo de baixa estimulação: sem animações, vibração ou efeitos desnecessários. Não substitui atendimento profissional em uma emergência.</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: EDITAR SÍMBOLOS ===== -->
+        <div class="page-section" id="page-edit-symbols">
+            <section class="edit-symbols-container">
+                <div class="edit-symbols-header">
+                    <div>
+                        <h3>✏️ Editar Símbolos</h3>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 4px; font-weight: 600;">
+                            Gerencie os símbolos disponíveis para comunicação.
+                        </p>
+                    </div>
+                    <div class="symbol-count" id="editSymbolCount">0 símbolos</div>
+                </div>
+
+                <div class="edit-symbol-grid" id="editSymbolsGrid"></div>
+
+                <button class="add-symbol-btn" id="addSymbolBtn" aria-label="Adicionar novo símbolo">
+                    ➕ Adicionar Símbolo
+                </button>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: HISTÓRICO ===== -->
+        <div class="page-section" id="page-history">
+            <section class="history-section">
+                <div class="history-header">
+                    <h2>📜 Todas as Mensagens</h2>
+                    <button id="clearHistoryBtn2" class="clear-history-btn" aria-label="Limpar todo o histórico">🗑️ Limpar histórico</button>
+                </div>
+                <div id="historyList2" class="history-list" style="max-height: 400px;" role="list">
+                    <p class="history-empty">Nenhuma mensagem salva ainda</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: RESPONSÁVEIS ===== -->
+        <div class="page-section" id="page-guardians">
+            <section class="guardians-container">
+                <div class="guardian-lock">
+                    <div><strong>🔐 Modo Responsável</strong><div style="font-size:.78rem;color:var(--text-light);font-weight:600;">Protege configurações e edição para evitar alterações acidentais.</div></div>
+                    <button type="button" id="guardianModeBtn">🔓 Ativar</button>
+                </div>
+                <div class="guardians-header">
+                    <div>
+                        <h3>👨‍👩‍👧 Responsáveis</h3>
+                        <p style="color: var(--text-light); font-size: 0.85rem; margin-top: 4px; font-weight: 600;">
+                            Gerencie os contatos dos responsáveis para comunicação rápida.
+                        </p>
+                    </div>
+                    <div class="guardian-count" id="guardianCount">0 responsáveis</div>
+                </div>
+
+                <div id="guardiansList"></div>
+
+                <button class="add-guardian-btn" id="addGuardianBtn" aria-label="Adicionar novo responsável">
+                    ➕ Adicionar Responsável
+                </button>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: MÉDICO ===== -->
+        <div class="page-section" id="page-medical">
+            <section class="medical-container">
+                <h3>🏥 Informações Médicas</h3>
+                <p class="medical-subtitle">Gerencie as informações de saúde para emergências e cuidados.</p>
+
+                <form class="medical-form" id="medicalForm">
+                    <div class="medical-section-title">🩺 Informações principais</div>
+                    <!-- Plano de Saúde -->
+                    <div class="medical-field">
+                        <label for="medHealthPlan">Plano de Saúde</label>
+                        <div class="field-input-group">
+                            <input type="text" id="medHealthPlan" placeholder="Ex.: Unimed">
+                            <button type="button" class="field-select-btn" onclick="openHealthPlanSelector()" aria-label="Selecionar plano de saúde">
+                                Selecionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="medical-section-title">🧠 Suporte e desenvolvimento</div>
+                    <!-- Grau de suporte -->
+                    <div class="medical-field">
+                        <label for="medSupportLevel">Grau de suporte (TEA)</label>
+                        <div class="field-input-group">
+                            <select id="medSupportLevel" aria-label="Selecionar grau de suporte">
+                                <option value="">Não informado</option>
+                                <option value="Nível 1">Nível 1 — necessidade de suporte</option>
+                                <option value="Nível 2">Nível 2 — necessidade de suporte substancial</option>
+                                <option value="Nível 3">Nível 3 — necessidade de suporte muito substancial</option>
+                            </select>
+                        </div>
+                        <div class="medical-support-note">Informação para referência dos responsáveis e atendimento. Não substitui avaliação profissional.</div>
+                    </div>
+
+                    <div class="medical-section-title">⚠️ Segurança e cuidados</div>
+                    <!-- Alergias -->
+                    <div class="medical-field">
+                        <label for="medAllergies">Alergias (pode selecionar mais de uma)</label>
+                        <div class="field-input-group">
+                            <input type="text" id="medAllergies" placeholder="Ex.: amendoim, leite">
+                            <button type="button" class="field-select-btn" onclick="openAllergiesSelector()" aria-label="Selecionar alergias">
+                                Selecionar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="medical-section-title">🧠 Necessidades sensoriais</div>
+                    <div class="medical-field sensory-profile-field">
+                        <label>Sensibilidades que podem aumentar o desconforto</label>
+                        <div class="sensory-check-grid">
+                            <label class="sensory-check"><input type="checkbox" id="sensSound"> 🔊 Sons</label>
+                            <label class="sensory-check"><input type="checkbox" id="sensLight"> 💡 Luzes</label>
+                            <label class="sensory-check"><input type="checkbox" id="sensTouch"> 🤝 Contato físico</label>
+                            <label class="sensory-check"><input type="checkbox" id="sensSmells"> 👃 Cheiros</label>
+                            <label class="sensory-check"><input type="checkbox" id="sensCrowds"> 👥 Ambientes cheios</label>
+                            <label class="sensory-check"><input type="checkbox" id="sensFabrics"> 👕 Tecidos/roupas</label>
+                        </div>
+                    </div>
+                    <div class="medical-field sensory-profile-field">
+                        <label>O que costuma ajudar durante uma crise?</label>
+                        <div class="sensory-check-grid helps-grid">
+                            <label class="sensory-check"><input type="checkbox" value="Fone ou proteção auricular" class="sensHelp"> 🎧 Fone</label>
+                            <label class="sensory-check"><input type="checkbox" value="Ambiente escuro ou com pouca luz" class="sensHelp"> 🌙 Pouca luz</label>
+                            <label class="sensory-check"><input type="checkbox" value="Silêncio" class="sensHelp"> 🤫 Silêncio</label>
+                            <label class="sensory-check"><input type="checkbox" value="Objeto de conforto" class="sensHelp"> 🧸 Objeto de conforto</label>
+                            <label class="sensory-check"><input type="checkbox" value="Presença do responsável" class="sensHelp"> ❤️ Responsável</label>
+                            <label class="sensory-check"><input type="checkbox" value="Espaço sem contato físico" class="sensHelp"> ✋ Espaço pessoal</label>
+                        </div>
+                    </div>
+
+                    <div class="medical-section-title">📋 Observações importantes</div>
+                    <!-- Observações -->
+                    <div class="medical-field">
+                        <label for="medObservations">Observações importantes</label>
+                        <div class="field-input-group">
+                            <textarea id="medObservations" placeholder="Informações relevantes" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Botão Salvar -->
+                    <button type="button" class="medical-save-btn" id="medicalSaveBtn">
+                        💾 Salvar
+                    </button>
+                </form>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: CONFIGURAÇÕES ===== -->
+        <div class="page-section" id="page-settings">
+            <section class="settings-container">
+                <h3>⚙️ Configurações</h3>
+                <p class="settings-subtitle">Personalize a experiência do aplicativo.</p>
+
+                <!-- Voz -->
+                <div class="settings-group">
+                    <div class="group-title">🔊 Voz</div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">🗣️</span>
+                            <span>Selecionar Voz</span>
+                        </div>
+                        <select id="voiceSelect" aria-label="Selecionar voz para sintetizador">
+                            <option value="default">✨ Melhor voz disponível</option>
+                        </select>
+                        <button type="button" class="voice-preview-btn" id="voicePreviewBtn">🔊 Ouvir esta voz</button>
+                        <div class="voice-helper">A Jornada de Bia procura automaticamente uma voz em português mais natural e suave. No Android/Chrome, as vozes disponíveis dependem das vozes instaladas no aparelho.</div>
+                        <div class="voice-quality"><span class="voice-quality-dot" id="voiceQualityDot"></span><span id="voiceQualityText">Procurando uma voz em português…</span></div>
+                    </div>
+
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">🔊</span>
+                            <span>Velocidade</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="range" id="voiceRate" min="0.6" max="1.5" step="0.05" value="0.92" aria-label="Velocidade da voz">
+                            <span class="range-value" id="voiceRateValue">0.9</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">📢</span>
+                            <span>Tom da Voz</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <input type="range" id="voicePitch" min="0.7" max="1.4" step="0.05" value="1.02" aria-label="Tom da voz">
+                            <span class="range-value" id="voicePitchValue">1.0</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">🔇</span>
+                            <span>Falar automaticamente</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="autoSpeak" aria-label="Ativar fala automática">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Aparência -->
+                <div class="settings-group appearance-settings">
+                    <div class="group-title">🎨 Aparência</div>
+                    <div class="settings-item appearance-color-row">
+                        <div class="settings-label">
+                            <span class="icon">🎨</span>
+                            <label for="colorThemeSelect">Cor do tema</label>
+                        </div>
+                        <select id="colorThemeSelect" class="appearance-theme-select" aria-label="Escolher cor do tema">
+                            <option value="blue">Azul</option>
+                            <option value="pink">Rosa</option>
+                            <option value="green">Verde</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">🌓</span>
+                            <span>Modo escuro</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle" aria-label="Ativar modo escuro">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p class="setting-help appearance-help">Escolha uma cor e ative ou desative o modo escuro independentemente.</p>
+                </div>
+
+                <!-- Segurança e biometria experimental -->
+                <div class="settings-group biometric-settings">
+                    <div class="group-title">🔐 Segurança e biometria</div>
+                    <p class="setting-help">Configure primeiro o PIN do Modo Responsável. A biometria usa o autenticador do aparelho quando disponível; o PIN continua como alternativa.</p>
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">📱</span>
+                            <span>Desbloqueio biométrico</span>
+                        </div>
+                        <div id="biometricStatus" class="biometric-status" role="status" aria-live="polite">Verificando suporte do navegador…</div>
+                        <div class="biometric-actions">
+                            <button type="button" id="biometricSetupBtn">🔑 Configurar biometria</button>
+                            <button type="button" id="biometricRemoveBtn" disabled>Remover biometria</button>
+                        </div>
+                    </div>
+                    <p class="setting-help biometric-warning">Versão experimental local: não substitui autenticação validada por servidor nem protege contra alguém que altere os arquivos ou o armazenamento do aplicativo. Use HTTPS ou localhost. A biometria nunca é recebida pela Jornada de Bia.</p>
+                </div>
+
+                <!-- Perfil da criança -->
+                <div class="settings-group profile-section">
+                    <div class="group-title">🌻 Perfil da criança</div>
+                    <div class="profile-photo-row">
+                        <div class="profile-photo" id="profilePhotoPreview">🌻</div>
+                        <div><strong id="profileNamePreview">Como podemos chamar?</strong><div style="font-size:.78rem;color:var(--text-light);margin-top:4px;font-weight:600;">Personalize nome, saudação e foto.</div></div>
+                    </div>
+                    <div class="profile-form">
+                        <div class="settings-item"><label for="childName">Nome</label><input id="childName" type="text" placeholder="Nome da criança"></div>
+                        <div class="settings-item"><label for="childGreetingInput">Saudação</label><input id="childGreetingInput" type="text" placeholder="Olá! Vamos conversar?"></div>
+                        <div class="settings-item full"><label for="childPhotoInput">Foto</label><input id="childPhotoInput" type="file" accept="image/*"></div>
+                    </div>
+                    <div class="profile-actions"><button id="saveProfileBtn" type="button" class="data-buttons">💾 Salvar perfil</button><button id="resetProfileBtn" type="button" class="data-buttons">↩️ Restaurar</button></div>
+                </div>
+
+                <!-- Backup -->
+                <div class="settings-group backup-section">
+                    <div class="group-title">📦 Backup e restauração</div>
+                    <p style="font-size:.8rem;color:var(--text-light);margin:0 0 12px;font-weight:600;">Guarde símbolos, responsáveis, histórico, preferências e aprendizado local.</p>
+                    <div class="data-buttons"><button id="exportDataBtn" type="button">⬇️ Exportar backup</button><button id="exportConfigBtn" type="button">⚙️ Backup configuração</button><button id="importDataBtn" type="button">⬆️ Importar backup</button><input id="importDataInput" type="file" accept="application/json" hidden></div>
+                </div>
+
+                <!-- V16: Painel de aprendizado -->
+                <div class="settings-group learning-dashboard">
+                    <div class="group-title">🧠 Aprendizado da Jornada de Bia</div>
+                    <p style="font-size:.8rem;color:var(--text-light);margin:0 0 14px;font-weight:600;">O aprendizado acontece localmente no aparelho. A Jornada de Bia observa padrões de uso para melhorar sugestões.</p>
+                    <div class="learning-stats-grid">
+                        <div class="learning-stat"><strong id="learningInteractions">0</strong><span>interações</span></div>
+                        <div class="learning-stat"><strong id="learningSequences">0</strong><span>sequências</span></div>
+                        <div class="learning-stat"><strong id="learningPhrases">0</strong><span>frases usadas</span></div>
+                        <div class="learning-stat"><strong id="learningFeedback">0%</strong><span>feedback positivo</span></div>
+                    </div>
+                    <div id="learningTopList" class="learning-top-list"></div>
+                    <button id="resetLearningBtn" type="button" class="data-buttons">♻️ Reiniciar aprendizado</button>
+                </div>
+
+                <!-- Dados -->
+                <div class="settings-group">
+                    <div class="group-title">💾 Dados</div>
+                    
+                    <div class="settings-item">
+                        <div class="settings-label">
+                            <span class="icon">🗑️</span>
+                            <span>Limpar todos os dados</span>
+                        </div>
+                        <button id="clearAllDataBtn" aria-label="Limpar todos os dados do aplicativo" style="background: var(--red); color: white; border: none; padding: 8px 20px; border-radius: 50px; font-family: var(--font); font-weight: 800; font-size: 0.75rem; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm);">
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== PÁGINA: SOBRE ===== -->
+        <div class="page-section" id="page-about">
+            <section class="about-container">
+                <h3>🌻∞ Sobre a Jornada de Bia</h3>
+                <div class="about-content">
+                    <p><strong>Jornada de Bia</strong> é um aplicativo de comunicação acessível que utiliza <span class="highlight">Inteligência Artificial</span> para ajudar pessoas com dificuldades de comunicação.</p>
+                    <br>
+                    <p>🧠 <strong>Como funciona:</strong></p>
+                    <ul>
+                        <li>📌 Toque nos símbolos para formar mensagens</li>
+                        <li>🤖 A IA aprende seus padrões de comunicação</li>
+                        <li>💡 Receba sugestões inteligentes em tempo real</li>
+                        <li>🔊 Ouça as mensagens em voz alta</li>
+                        <li>💬 Envie mensagens via WhatsApp para os responsáveis</li>
+                        <li>✏️ O responsável pode editar e adicionar novos símbolos</li>
+                    </ul>
+                    <br>
+                    <p style="font-size: 0.9rem; font-style: italic; font-weight: 600;">
+                        🌻∞ <em>"Comunicação é amor, e o amor é infinito."</em>
+                    </p>
+                    <div class="about-dev">
+                        <p>👨‍💻 <strong>Desenvolvedor:</strong> Rafael Ricardo Mayer</p>
+                        <p>📧 <span class="dev-email">rafael10mayer@gmail.com</span></p>
+                        <p>📱 <span style="color: var(--text-light); font-weight: 600;">v29.0.0 - Modo sensorial personalizado</span></p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===== MODAL DE CONTATO WHATSAPP ===== -->
+        <div class="contact-modal" id="contactModal">
+            <div class="contact-modal-content">
+                <button class="contact-modal-close" onclick="closeContactModal()" aria-label="Fechar">✕</button>
+                <h3>💬 Contatar Responsável</h3>
+                <p class="modal-subtitle">Escolha um responsável para entrar em contato</p>
+                
+                <div class="quick-messages">
+                    <button class="quick-message-btn" onclick="sendQuickMessageToSelected('Estou bem! 💪')" aria-label="Enviar mensagem: Estou bem">✅ Estou bem!</button>
+                    <button class="quick-message-btn" onclick="sendQuickMessageToSelected('Preciso de ajuda! 🆘')" aria-label="Enviar mensagem: Preciso de ajuda">🆘 Ajuda!</button>
+                    <button class="quick-message-btn" onclick="sendQuickMessageToSelected('Estou com saudades! ❤️')" aria-label="Enviar mensagem: Estou com saudades">❤️ Saudades!</button>
+                    <button class="quick-message-btn" onclick="sendQuickMessageToSelected('Vou chegar atrasado! ⏰')" aria-label="Enviar mensagem: Vou chegar atrasado">⏰ Atraso!</button>
+                </div>
+                
+                <div id="contactList"></div>
+                
+                <div style="margin-top: 14px; text-align: center; font-size: 0.75rem; color: var(--text-light); font-weight: 600;">
+                    💡 Clique em 💬 para WhatsApp ou 📞 para ligar
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL RESPONSÁVEL ===== -->
+        <div class="guardian-modal" id="guardianModal">
+            <div class="guardian-modal-content">
+                <h3 id="modalTitle">➕ Adicionar Responsável</h3>
+                <p class="modal-subtitle" id="modalSubtitle">Preencha os dados do novo responsável</p>
+                
+                <div class="form-group">
+                    <label for="guardianName">Nome completo *</label>
+                    <input type="text" id="guardianName" placeholder="Ex: Maria Silva" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="guardianRelationship">Parentesco *</label>
+                    <input type="text" id="guardianRelationship" placeholder="Ex: Mãe, Pai, Avó" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="guardianPhone">Telefone *</label>
+                    <input type="tel" id="guardianPhone" placeholder="(11) 99999-9999" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="guardianEmail">E-mail</label>
+                    <input type="email" id="guardianEmail" placeholder="email@exemplo.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="guardianObservations">Observações</label>
+                    <textarea id="guardianObservations" placeholder="Informações adicionais..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="guardianPrimary">
+                        <label for="guardianPrimary">⭐ Marcar como responsável principal</label>
+                    </div>
+                </div>
+                
+                <div class="guardian-modal-actions">
+                    <button class="btn-cancel" id="modalCancel" aria-label="Cancelar">Cancelar</button>
+                    <button class="btn-save" id="modalSave" aria-label="Salvar responsável">💾 Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL DE EDIÇÃO DE SÍMBOLO ===== -->
+        <div class="symbol-modal" id="symbolModal">
+            <div class="symbol-modal-content">
+                <h3 id="symbolModalTitle">➕ Adicionar Símbolo</h3>
+                <p class="modal-subtitle" id="symbolModalSubtitle">Preencha os dados do novo símbolo</p>
+                
+                <div class="form-group">
+                    <label for="symbolEmoji">Emoji *</label>
+                    <input type="text" id="symbolEmoji" placeholder="Ex: 🍕" maxlength="2" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="symbolLabel">Nome *</label>
+                    <input type="text" id="symbolLabel" placeholder="Ex: Pizza" required aria-required="true">
+                </div>
+                
+                <div class="form-group">
+                    <label for="symbolCategory">Categoria *</label>
+                    <select id="symbolCategory" required aria-required="true">
+                        <option value="comer">🍽️ Comer</option>
+                        <option value="sentimentos">😊 Sentimentos</option>
+                        <option value="acoes">🏃 Ações</option>
+                        <option value="objetos">🎨 Objetos</option>
+                    </select>
+                </div>
+                
+                <div class="symbol-modal-actions">
+                    <button class="btn-cancel" id="symbolModalCancel" aria-label="Cancelar">Cancelar</button>
+                    <button class="btn-save" id="symbolModalSave" aria-label="Salvar símbolo">💾 Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL SELETOR DE PLANO DE SAÚDE ===== -->
+        <div class="selector-modal" id="healthPlanModal">
+            <div class="selector-modal-content">
+                <div class="selector-modal-header">
+                    <h4>Selecionar Plano de Saúde</h4>
+                    <button class="selector-modal-close" onclick="closeHealthPlanModal()" aria-label="Fechar">✕</button>
+                </div>
+                <div class="selector-search">
+                    <input type="text" id="healthPlanSearch" placeholder="Buscar plano..." oninput="filterHealthPlans()">
+                </div>
+                <div class="selector-list" id="healthPlanList"></div>
+                <div class="selector-modal-actions">
+                    <button class="btn-cancel" onclick="closeHealthPlanModal()" aria-label="Cancelar">Cancelar</button>
+                    <button class="btn-save" onclick="selectHealthPlan()" aria-label="Selecionar">Selecionar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MODAL SELETOR DE ALERGIAS ===== -->
+        <div class="selector-modal" id="allergiesModal">
+            <div class="selector-modal-content">
+                <div class="selector-modal-header">
+                    <h4>Selecionar Alergias</h4>
+                    <button class="selector-modal-close" onclick="closeAllergiesModal()" aria-label="Fechar">✕</button>
+                </div>
+                <div class="selector-search">
+                    <input type="text" id="allergiesSearch" placeholder="Buscar alergia..." oninput="filterAllergies()">
+                </div>
+                <div class="selector-list" id="allergiesList"></div>
+                <div class="selector-modal-actions">
+                    <button class="btn-cancel" onclick="closeAllergiesModal()" aria-label="Cancelar">Cancelar</button>
+                    <button class="btn-save" onclick="selectAllergies()" aria-label="Selecionar">Selecionar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FAB - BOTÃO FLUTUANTE ===== -->
+        <div class="quick-contact-fab" id="quickContactFab" style="display: none;">
+            <button class="fab-main" id="fabMain" aria-label="Contato rápido WhatsApp">
+                💬
+            </button>
+            <div class="fab-options" id="fabOptions"></div>
+        </div>
+
+        <!-- ===== INSTALL BANNER ===== -->
+        <div id="installBanner" class="install-banner" style="display: none;">
+            <p>📱 Instale o app para uma melhor experiência!</p>
+            <button id="installBtn" class="install-btn" aria-label="Instalar aplicativo">Instalar App</button>
+            <button id="installClose" class="install-close" aria-label="Fechar">×</button>
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>&copy; 2026 Jornada de Bia - Todos os direitos reservados</p>
+            <p class="footer-dev">
+                Desenvolvido por <strong>Rafael Ricardo Mayer</strong> 
+                <span class="footer-email">📧 rafael10mayer@gmail.com</span>
+            </p>
+            <p class="footer-version">🌻∞ v31.8 - Correção das estatísticas e biometria experimental</p>
+        </div>
+    </footer>
+
+    
+    <script src="js/security.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/backup-crypto.js"></script>
+    <script src="js/backup.js"></script>
+    <script src="js/security-advanced.js"></script>
+    <script src="js/random-forest.js"></script>
+    <script src="js/app.js"></script>
+
+<!-- Service Worker registrado centralmente por js/app.js -->
+</body>
+</html>
